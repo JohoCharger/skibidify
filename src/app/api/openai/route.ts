@@ -21,5 +21,5 @@ export async function POST(request: Request) {
 
     const answer = completion.choices[0].message.content;
 
-    return new Response(JSON.stringify({text: answer}), {status: 200});
+    return new Response(answer, {status: 200});
 }

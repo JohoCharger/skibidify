@@ -16,8 +16,9 @@ export default function Transformer() {
                     text: input
                 }),
         });
-        const answer = await data.json()
-        setTransformed(answer.text);
+
+        const json = await data.json();
+        setTransformed(json.text);
     }
 
     return (
