@@ -1,26 +1,25 @@
-import {useEffect, useState} from "react";
+import React, {useState} from "react";
 import {useAuth, AuthContextType} from "context/AuthContextProvider";
-import {useRouter} from 'next/router';
 
 import "bootstrap-icons/font/bootstrap-icons.css";
-import "public/SignIn.css";
+import "public/signin.css";
+import Link from "next/link";
+import FirebaseError from "components/FirebaseError";
 
-export default function SignIn() {
+export default function SignInBox() {
     const [password, setPassword] = useState("");
     const [email, setEmail] = useState("");
     const [rememberMe, setRememberMe] = useState(true);
+    const [errorMessage, setErrorMessage] = useState("");
 
-    const router = useRouter();
+    const {googleSignIn, signInWithPassword} = useAuth() as AuthContextType;
 
-    const {user, googleSignIn, signInWithPassword} = useAuth() as AuthContextType;
+    function handlePasswordSignIn() {
+        signInWithPassword(email, password, setErrorMessage);
+    }
 
-    function handlePasswordSignIn(e) {
-        e.preventDefault();
-        try {
-            signInWithPassword(email, password);
-        } catch (error) {
-            console.error(error);
-        }
+    function handleGoogleSignIn() {
+        googleSignIn(setErrorMessage);
     }
 
     return (
@@ -34,7 +33,7 @@ export default function SignIn() {
                 <div className="gp-login box-shadow">
                     <a id="google-login"
                        className="d-flex flex-row align-items-center social-login-link text-center"
-                       href="#" onClick={googleSignIn}><i className="bi bi-google"></i>Sign In with Google
+                       href="#" onClick={handleGoogleSignIn}><i className="bi bi-google"></i>Sign In with Google
                     </a>
                 </div>
             </div>
@@ -68,10 +67,11 @@ export default function SignIn() {
                     </div>
                     <a id="forgot-password-link" href="#">Forgot Password?</a>
                 </div>
+                <FirebaseError errorMessage={errorMessage}/>
             </div>
 
             <div id="login-box-footer" className="login-box-footer">
-                <p>Don&#39;t you have an account?<a id="register-link" href="#">Sign Up!</a></p>
+                <p>Don&#39;t have an account?<Link id="register-link" href="/signup">Sign Up!</Link></p>
             </div>
         </div>
     )

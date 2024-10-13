@@ -1,0 +1,45 @@
+#signup-title {
+    color: rgb(139, 139, 139);
+    margin-bottom: 0px;
+    font-weight: 400;
+    font-size: 27px;
+}
+
+.form-control {
+    box-shadow: none;
+    font-size: 16px;
+    padding: 10px 12px;
+    transition: border-color .08s ease-in-out, box-shadow .08s ease-in-out;
+}
+
+.email-input, .password-input {
+    margin-top: 10px;
+}
+
+
+#google-signup {
+    margin-bottom: 10px;
+}
+
+#seperator-text {
+    margin-bottom: 0px;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-weight: 400;
+    color: rgb(201, 201, 201);
+}
+
+#email-login-container {
+    background-color: #ffffff;
+}
+
+#submit-row-container {
+    margin-bottom: 8px;
+    padding-top: 0px;
+}
+
+#login-box-footer {
+    padding: 10px 20px;
+    padding-bottom: 23px;
+    padding-top: 18px;
+}

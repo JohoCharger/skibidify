@@ -1,10 +1,10 @@
-import SignInBox from "components/SignInBox";
+import SignUpBox from "components/SignUpBox";
 import {AuthContextProvider} from "context/AuthContextProvider";
 
-export default function Login() {
+export default function SignUpPage() {
     return (
         <AuthContextProvider>
-            <SignInBox/>
+            <SignUpBox/>
         </AuthContextProvider>
     );
 }

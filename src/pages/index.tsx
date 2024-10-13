@@ -1,5 +1,3 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootswatch/dist/lux/bootstrap.min.css'
 import 'public/landing.css';
 import 'components/Transformer'
 import Transformer from "components/Transformer";
