@@ -4,7 +4,7 @@ import {useAuth, AuthContextType} from "context/AuthContextProvider";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "public/signin.css";
 import Link from "next/link";
-import FirebaseError from "components/FirebaseError";
+import ErrorDisplay from "components/ErrorDisplay";
 
 export default function SignInBox() {
     const [password, setPassword] = useState("");
@@ -67,7 +67,7 @@ export default function SignInBox() {
                     </div>
                     <a id="forgot-password-link" href="#">Forgot Password?</a>
                 </div>
-                <FirebaseError errorMessage={errorMessage}/>
+                <ErrorDisplay errorMessage={errorMessage}/>
             </div>
 
             <div id="login-box-footer" className="login-box-footer">

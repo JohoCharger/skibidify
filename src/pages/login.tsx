@@ -1,4 +1,4 @@
-import SignInBox from "components/SignInBox";
+import SignInBox from "components/auth/SignInBox";
 import {AuthContextProvider} from "context/AuthContextProvider";
 
 export default function Login() {

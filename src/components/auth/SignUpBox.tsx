@@ -1,7 +1,7 @@
 import {useAuth, AuthContextType} from "context/AuthContextProvider";
 import Link from "next/link";
 import React, {useState} from "react";
-import FirebaseError from "components/FirebaseError";
+import ErrorDisplay from "components/ErrorDisplay";
 
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "public/signup.css"
@@ -69,7 +69,7 @@ export default function SignUpBox() {
                         </label>
                     </div>
                 </div>
-                <FirebaseError errorMessage={errorMessage}/>
+                <ErrorDisplay errorMessage={errorMessage}/>
             </div>
             <div id="login-box-footer" className="login-box-footer">
                 <p style={{marginBottom: "0px"}}>Already have an account?<Link id="register-link" href="/login">Sign

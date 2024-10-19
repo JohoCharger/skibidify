@@ -11,3 +11,11 @@ textarea {
     width: 100%;
     height: 30vh;
 }
+
+#input-tag {
+    width: 46% !important;
+}
+
+#output-tag {
+    width: 46% !important;
+}

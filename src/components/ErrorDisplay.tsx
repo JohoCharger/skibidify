@@ -1,4 +1,4 @@
-export default function FirebaseError(props: { errorMessage: string; }) {
+export default function ErrorDisplay(props: { errorMessage: string; }) {
     const {errorMessage} = props;
     return (
         <div className="d-block justify-content-center align-items-center"

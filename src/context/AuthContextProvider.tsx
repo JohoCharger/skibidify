@@ -1,5 +1,6 @@
 "use client"
 
+import {useRouter} from "next/router"
 import {useContext, createContext, useState, useEffect} from 'react';
 import {
     signInWithPopup,
@@ -52,16 +53,36 @@ function handleError(code: string, errorFunction: ErrorFunction) {
     }
 }
 
+
 // @ts-expect-error-next-line
 export const AuthContextProvider = ({children}) => {
     const [user, setUser] = useState(null);
     const provider = new GoogleAuthProvider();
+    const router = useRouter()
+
+// @ts-expect-error-next-line
+    async function createDatabaseAccount(user) {
+        const idToken = await user.getIdToken();
+        const response = await fetch("http://localhost:8000/api/users/create/", {
+            method: 'POST',
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                token: idToken,
+            }),
+        });
+        console.log(response);
+    }
 
     const googleSignIn = (errorFunction: ErrorFunction) => {
         signInWithPopup(auth, provider)
             .then((result) => {
                 // @ts-expect-error-next-line
                 setUser(result.user);
+                createDatabaseAccount(result.user);
+                router.push("/");
             })
             .catch((error) => {
                 handleError(error.code, errorFunction);
@@ -83,6 +104,8 @@ export const AuthContextProvider = ({children}) => {
             .then((result) => {
                 // @ts-expect-error-next-line
                 setUser(result.user);
+                createDatabaseAccount(result.user);
+                router.push("/");
             })
             .catch((error) => {
                 handleError(error.code, errorFunction);
@@ -94,6 +117,7 @@ export const AuthContextProvider = ({children}) => {
             .then((result) => {
                 // @ts-expect-error-next-line
                 setUser(result.user);
+                router.push("/");
             })
             .catch((error) => {
                 handleError(error.code, errorFunction);

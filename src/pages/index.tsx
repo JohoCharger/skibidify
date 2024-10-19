@@ -1,7 +1,8 @@
 import 'public/landing.css';
 import 'components/Transformer'
 import Transformer from "components/Transformer";
-import Navbar from "components/Navbar";
+import Navbar from "components/nav/Navbar";
+import {AuthContextProvider} from "context/AuthContextProvider";
 
 export default function Home() {
     return (
@@ -12,7 +13,7 @@ export default function Home() {
                     <h3>Make your <span className="text-danger">Skibidi</span> come true</h3>
                 </div>
             </div>
-            <Transformer/>
+            <AuthContextProvider><Transformer/></AuthContextProvider>
         </div>
     );
 }
