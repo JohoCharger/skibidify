@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import React from 'react';
 import fetch from "node-fetch";
 import {useAuth, AuthContextType} from "context/AuthContextProvider";
@@ -9,6 +9,7 @@ export default function Transformer() {
     const [input, setInput] = useState<string>('');
     const [loading, setLoading] = useState<boolean>(false);
     const [errorMessage, setErrorMessage] = useState<string>('');
+    const [credits, setCredits] = useState<number>(0);
 
     const {user} = useAuth() as AuthContextType;
 
@@ -26,6 +27,27 @@ export default function Transformer() {
         }
     }
 
+    useEffect(() => {
+        async function fetchCredits() {
+            const token = await user?.getIdToken();
+            if (token) {
+                const queryParams = new URLSearchParams({token});
+                fetch('http://localhost:8000/api/users/credits/?' + queryParams, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                }).then(response => response.json())
+                    .then(json => {
+                        setCredits(json.credits);
+                    }).catch(() => {
+                    setCredits(0);
+                });
+            }
+        }
+
+        fetchCredits();
+    }, [user]);
 
     async function handleSubmit(e: React.MouseEvent<HTMLButtonElement>) {
         e.preventDefault();
@@ -51,6 +73,7 @@ export default function Transformer() {
             setLoading(false);
         } else {
             setTransformed(json.transformed);
+            setCredits(credits - 1);
             setLoading(false);
         }
 
@@ -96,6 +119,7 @@ export default function Transformer() {
                          role="status">
                         <span className="sr-only"></span>
                     </div>
+                    <div className="text-white p-2">Free credits: {credits}</div>
                 </div>
             </div>
         </>
