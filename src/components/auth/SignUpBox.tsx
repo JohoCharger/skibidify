@@ -11,17 +11,28 @@ export default function SignUpBox() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
-    const [rememberMe, setRememberMe] = useState(true);
+    const [rememberMeChecked, setRememberMeChecked] = useState(true);
 
     const [errorMessage, setErrorMessage] = useState("");
 
-    const {googleSignIn, signUpWithPassword} = useAuth() as AuthContextType;
+    const {googleSignIn, signUpWithPassword, rememberMe, dontRememberMe} = useAuth() as AuthContextType;
 
     function handleGoogleSignUp() {
+        if (rememberMeChecked) {
+            rememberMe();
+        } else {
+            dontRememberMe();
+        }
         googleSignIn(setErrorMessage);
     }
 
-    function handleEmailSignUp() {
+    async function handleEmailSignUp() {
+        if (rememberMeChecked) {
+            rememberMe();
+        } else {
+            dontRememberMe();
+        }
+
         signUpWithPassword(email, password, setErrorMessage);
     }
 
@@ -63,7 +74,7 @@ export default function SignUpBox() {
                     <div id="form-check-rememberMe" className="form-check form-check-inline">
                         <input id="formCheck-1" className="form-check-input" type="checkbox"
                                style={{cursor: "pointer"}} name="check"
-                               checked={rememberMe} onChange={() => setRememberMe(!rememberMe)}/>
+                               checked={rememberMeChecked} onChange={() => setRememberMeChecked(!rememberMeChecked)}/>
                         <label className="form-check-label" htmlFor="formCheck-1">
                             <span className="label-text">Remember Me</span>
                         </label>

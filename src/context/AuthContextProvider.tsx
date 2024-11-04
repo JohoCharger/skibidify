@@ -8,7 +8,10 @@ import {
     onAuthStateChanged,
     createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
-    GoogleAuthProvider, User
+    GoogleAuthProvider, User,
+    setPersistence,
+    browserLocalPersistence,
+    browserSessionPersistence
 } from 'firebase/auth';
 import {auth} from 'lib/firebaseConfig';
 
@@ -21,6 +24,8 @@ export interface AuthContextType {
     logOut: () => void;
     signUpWithPassword: (email: string, password: string, setErrorMessage: (value: (((prevState: string) => string) | string)) => void) => void;
     signInWithPassword: (email: string, password: string, setErrorMessage: (value: (((prevState: string) => string) | string)) => void) => void;
+    rememberMe: () => void;
+    dontRememberMe: () => void;
 }
 
 interface ErrorFunction {
@@ -124,6 +129,14 @@ export const AuthContextProvider = ({children}) => {
             });
     }
 
+    const rememberMe = async () => {
+        await setPersistence(auth, browserLocalPersistence);
+    }
+
+    const dontRememberMe = async () => {
+        await setPersistence(auth, browserSessionPersistence);
+    }
+
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
             if (user) {
@@ -136,7 +149,8 @@ export const AuthContextProvider = ({children}) => {
         return () => unsubscribe();
     }, [user]);
     return (
-        <AuthContext.Provider value={{user, googleSignIn, logOut, signUpWithPassword, signInWithPassword}}>
+        <AuthContext.Provider
+            value={{user, googleSignIn, logOut, signUpWithPassword, signInWithPassword, rememberMe, dontRememberMe}}>
             {children}
         </AuthContext.Provider>
     );
