@@ -1,36 +1,30 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# _Skibidify_
 
-## Getting Started
+### 🚧🛠️ Important: This project is still under development, most up-to-date version can be found in the `newux` branch.
 
-First, run the development server:
+## Description 📝
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- Skibidify is a web application that allows users to input text, which will then be turned into a _skibidified_
+  version.
+    - See [skibidi](https://en.wiktionary.org/wiki/skibidi) and [brainrot](https://knowyourmeme.com/memes/brain-rot) for
+      more information.
+- Contains 3 payment plans: Free, Premium, and Ultra.
+- Users are managed through Firebase Authentication, allowing to sign up with Google, or email and password.
+- Payment processing is done using Stripe.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Technical Details 🛠️
 
-You can start editing the page by modifying `app/index.tsx`. The page auto-updates as you edit the file.
+### Frontend ✨
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Powered by React.js and Next.js, brought to life with Bootstrap.
+- Designed in Bootstrap Studio.
+- Authentication is done via Firebase Authentication.
 
-## Learn More
+### Backend 🖥️
 
-To learn more about Next.js, take a look at the following resources:
+- Built with Django and Django REST Framework.
+- Uses DjangoDB for database management.
+- Stripe API for payment processing and management.
+- ChatGPT for text transformation.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+❗ _Note_: The backend repo is private due to security reasons.
